@@ -1,7 +1,18 @@
-Yihui Fang
-011679103
-Fiance/Computer Sience 
+# Smile App   
 
+## “Smile” A Simple Message Portal 
+
+
+--------
+Prepared by:
+* `<Yihui Fang>`
+---
+
+**Course** : CptS 322 - Software Engineering Principles I
+
+**Instructor**: Sakire Arslan Ay
+
+---
     * app
             * __init__.py            Python script that initializes the `app` module. 
             * Controller

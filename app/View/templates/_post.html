@@ -1,0 +1,76 @@
+<table class = "posttable" style = "width:100%" valign="top">
+        <tr> 
+            <td colspan="3"><div class="posttitle"> {{post.title}} </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" >
+                {% if post.happiness_level == 1 %}
+                <!--  (milestone1) TODO: include happiness-level image according to the `cost`s happiness_level .
+                For example : <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}"-->  
+                <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}">
+                {% elif post.happiness_level == 2 %}
+                <img src="{{ url_for('static', filename = 'img//happiness-level-2.png' )}}">
+                {% else %}
+                <img src="{{ url_for('static', filename = 'img//happiness-level-3.png' )}}">
+                {%endif%}
+            </td>
+
+            <td width="80%" >
+                <div>
+                  <!-- (milestone1) TODO: include post body -->    
+                <p>{{ post.body }}</p>
+                </div>
+                <div class = "posttimestamp">
+                  <!-- (milestone3) TODO: format the timestamp; display as local date/time-->
+                  Posted at: {{ moment(post.timestamp).format('LLL')}}
+
+               </div> 
+            </td> 
+
+            <td width = "5%"> 
+                <div class="likecount">
+                    <!-- (milestone1)  TODO: add "like" button
+                                       Define an HTML `post` form with a submit button. The form action should redirect to `routes.like` route.
+                                       Style the submit button using `likebtn` CCS class selector. -->
+                        <form action="{{url_for('routes.like',post_id=post.id)}}" method="post">
+                            <input type="image" src="{{url_for('static', filename = 'img//like.png' )}}", alt = "submit" class = "likebtn">
+                        </form>               
+                    <br>
+                    <!-- (milestone1) TODO: include the likes count-->
+                    <p>{{post.likes}}</p>
+                    
+                    
+                </div>
+                <br> 
+                 <!-- (milestone3) TODO: if the post is posted by the logged in user, include the "delete" button.  
+                                   Define an HTML `post` form with a submit button. The form action should redirect to `routes.deletepost` route.
+                                   Style the submit button using `button` CCS class selector. -->
+                        <form action="{{url_for('routes.delete', post_id=post.id) }}" method="post">
+                            <input type="submit" value="Delete" >
+                        </form>
+                    <br>
+            </td>
+        </tr>
+        
+        <tr> 
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                <!-- (milestone2) TODO: include all the tags associated with the post-->
+                {% for tag in post.get_tags().all() %}
+                   <span class ="tagitem">  {{ tag.name }} </span>
+                {% endfor %}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                  <!-- (milestone3) TODO: include username who posted the post-->
+                  <div class = "userposts">
+                    Posted by: <span class ="tagitem">  {{ current_user.username }}</span>
+                </div> 
+              </td>
+            </tr>
+        </tr>
+    </table>
